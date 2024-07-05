@@ -1,0 +1,921 @@
+* {
+    margin: 0;
+    padding:0 ; 
+    /* box-sizing: border-box; */
+}
+
+body {
+    /* 定义瓶子的宽度 */
+    --bottle-main-width: 150px;
+    --bottle-top-width: calc(var(--bottle-main-width) - 40px);
+    --bottle-neck-width: calc(var(--bottle-main-width) - 58px);
+
+    /* 定义瓶子的高度 */
+    --bottle-main-height: 150px;
+    --bottle-top-height: 30px;
+    --bottle-neck-height: 20px;
+    --bottle-mouse-height: 58px;
+
+    /* 定义水的高度 */
+    --water-height: 100px;
+}
+
+.main {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 100vh;
+    background: #ddd;
+    flex-wrap: wrap;
+}
+
+.bottle {
+    position: relative;
+    width: 240px;
+    margin: 90px 0px;
+}
+
+.bottle::after {
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    position: absolute;
+    display: block;
+    height: 14px;
+    /* width: 100px; */
+    width: var(--bottle-main-width);
+    border-radius: 46px / 10px;
+    box-shadow: 0px 1px 4px -2px rgba(0, 0, 0, 0.2), 0px 2px 10px -3px rgba(0, 0, 0, 0.1);
+    bottom: -7.6px;
+    z-index: 0;
+}
+
+.bottle:before {
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    display: block;
+    height: 14px;
+    /* width: 100px; */
+    width: var(--bottle-main-width);
+    border-radius: 46px / 10px;
+    box-shadow: 0px 2px 10px -2px rgba(0, 204, 255, 0.3), 0px 2px 15px -2px rgba(0, 204, 255, 0.4);
+    position: absolute;
+    bottom: -7.6px;
+    z-index: 0;
+}
+
+.bottle_top {
+    /* height: 30px; */
+    height: var(--bottle-top-height);
+    /* width: 80px; */
+    width: var(--bottle-top-width);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: none;
+    border-bottom: none;
+    margin: 0px auto;
+    transform: translate(0px,0px) rotate(0deg);
+    /* animation: open 2s linear alternate infinite; */
+}
+
+.bottle_top::before , .bottle_top::after {
+    content: '';
+    position: absolute;
+    height: 10px;
+    /* width: 78px; */
+    width: calc(var(--bottle-top-width) - 2px);
+    border-radius: 46px/10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    left: -1px;
+    box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6) inset;
+}
+
+.bottle_top:after {
+    /* 这里的是bottle_top的上面的圆,具体的向上的高度是  (height + border)/2 即6个像素 */
+    top: -6px;
+    box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6) inset, 0px 3px 3px -1px rgba(255, 255, 255, 0.3);
+}
+.bottle_top:before {
+    top: 24px;
+    box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.4) inset;
+}
+
+.bottle_top .highlight {
+    display: block;
+    /* height: 30px; */
+    height: var(--bottle-top-height);
+    width: 20px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    transform: skew(0deg, 5deg);
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.6) 4%, rgba(255, 255, 255, 0.2) 98%, rgba(255, 255, 255, 0));
+}
+.bottle_top .highlight:after {
+    content: '';
+    display: block;
+    /* height: 30px; */
+    height: var(--bottle-top-height);
+    width: 2px;
+    position: absolute;
+    left: -3px;
+    top: -1px;
+    transform: skew(0deg, 5deg);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+@keyframes open {
+    0% {
+        transform: translate(10px,-30px) rotate(0deg);
+    }
+    30% {
+        transform: translate(60px,-60px) rotate(35deg);
+    }
+
+    50% {
+        transform: translate(120px,-100px) rotate(90deg);
+    }
+    70% {
+        transform: translate(60px,-60px) rotate(35deg);
+    }
+    100% {
+        transform: translate(0px,0px) rotate(0deg);
+    }
+}
+
+
+.bottle_mouth {
+    height: 52px;
+    height: var(--bottle-mouse-height);
+    /* width: 44px; */
+    width: calc( var(--bottle-top-width) - 36px);
+    margin: 0px auto;
+    position: relative;
+    /* 以上四行代码是一种相对定位居中的方式 */
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-top: none;
+    border-bottom: none;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 5%, 
+    rgba(255, 255, 255, 0) 95%, rgba(255, 255, 255, 0.3));
+    box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.3);
+}
+
+.bottle_mouth:after {
+    content: '';
+    display: block;
+    height: 6px;
+    /* width: 44px; */
+    width: calc( var(--bottle-top-width) - 36px);
+    border-radius: 25px/6px;
+    /* 注意这里的第二个参数值刚好是元素的高度值 */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    position: absolute;
+    left: -1px;
+    top: -4px;
+    /* 这里的上移值是 (height+ border)/2 (6+2)/2 */
+    z-index: 1;
+    box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3);
+}
+
+.bottle_neck {
+    height: 20px;
+    height: var(--bottle-neck-height);
+    /* width: 62px; */
+    width: var(--bottle-neck-width);
+    position: relative;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: none;
+    border-bottom: none;
+    margin: 0px auto;
+}
+.bottle_neck:after,
+.bottle_neck:before {
+    content: '';
+    display: block;
+    height: 8px;
+    /* width: 62px; */
+    width: var(--bottle-neck-width);
+    border-radius: 30px/8px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: none;
+    position: absolute;
+    left: -1px;
+}
+.bottle_neck:after {
+    top: -4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 5px 3px -2px rgba(0, 0, 0, 0.05);
+}
+.bottle_neck:before {
+    top: 16px;
+}
+
+.bottle_neck .highlight {
+    display: block;
+    height: 20px;
+    width: 25px;
+    position: absolute;
+    left: 2px;
+    top: 6px;
+    transform: skew(0deg, 6deg);
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3) 4%, rgba(255, 255, 255, 0.1) 98%, rgba(255, 255, 255, 0));
+}
+
+
+
+
+
+.bottle_main {
+    /* height: 150px; */
+    height: var(--bottle-main-height);
+    position: relative;
+    /* width: 98px; */
+    width: calc(var(--bottle-main-width) - 2px);
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: none;
+    border-bottom: none;
+    margin: 0 auto;
+}
+.bottle_main:after,
+.bottle_main:before {
+    content: '';
+    display: block;
+    height: 12px;
+    /* width: 96px; */
+    width: calc(var(--bottle-main-width) - 4px);
+    border-radius: 46px/10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    position: absolute;
+    left: -1px;
+}
+.bottle_main:after {
+    top: -7px;
+    box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6) inset, 0px 3px 3px -1px rgba(255, 255, 255, 0.4), 0px 0px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 6px rgba(255, 255, 255, 0.7) inset, 0px 0px 3px rgba(0, 0, 0, 0.15) inset;
+}
+.bottle_main:before {
+    top: 143px;
+    box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7) inset, 0px 0px 3px rgba(0, 0, 0, 0.15) inset;
+}
+
+.bottle_main .highlight {
+    display: block;
+    /* height: 150px; */
+    height: var(--bottle-main-height);
+    width: 25px;
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    transform: skew(0deg, 6deg);
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5) 4%, rgba(255, 255, 255, 0.2) 98%, rgba(255, 255, 255, 0));
+    z-index: 2;
+}
+.bottle_main .highlight:after {
+    content: '';
+    display: block;
+    /* height: 150px; */
+    height: var(--bottle-main-height);
+    width: 4px;
+    position: absolute;
+    left: -6px;
+    top: 0px;
+    transform: skew(0deg, 3deg);
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 80%);
+}
+
+
+.bottle_inner {
+    height: calc(var(--bottle-main-height) - 1px);
+    width: 92%;
+    margin: 0px auto;
+    border-radius: 10px 10px 20px 20px/10px;
+    border: 1px solid rgba(0, 0, 0, 0.01);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom-width: 0.5px;
+    position: relative;
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5) inset, 0px 0px 8px rgba(255, 255, 255, 0.6) inset, 0px 0px 5px rgba(255, 255, 255, 0.5);
+    top: 1px;
+}
+.bottle_inner:before {
+    content: '';
+    display: block;
+    border-radius: 40px/4px;
+    position: absolute;
+    top: 140px;
+    width: 90%;
+    left: 3px;
+    height: 9px;
+}
+
+.water {
+    background: linear-gradient(-85deg, rgba(0, 204, 255, 0.35), rgba(0, 173, 216, 0.55) 70%, rgba(0, 173, 216, 0.4));
+    height: 80px;
+    height: var(--water-height);
+    width: 98%;
+    position: absolute;
+    left: 1px;
+    bottom: 1px;
+    border-radius: 50px 50px 20px 20px/8px 8px 10px 10px;
+    box-shadow: 0px 0px 6px rgba(0, 204, 255, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(0, 204, 255, 0.3), 0px 1px 3px rgba(0, 204, 255, 0.2);
+}
+.water:after {
+    content: '';
+    display: block;
+    height: 10px;
+    /* width: 88px; */
+    width: 100%;
+    position: absolute;
+    left: -1px;
+    top: 0px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.4), rgba(0, 204, 255, 0.05) 50%, rgba(0, 204, 255, 0.1) 80%, rgba(255, 255, 255, 0.3));
+    border-radius: 50px/8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0px 1px 2px -1px rgba(0, 204, 255, 0.35);
+}
+.water:before {
+    content: '';
+    display: block;
+    height: 10px;
+    /* width: 82px; */
+    width: 98%;
+    position: absolute;
+    left: 2px;
+    bottom: -1px;
+    background: linear-gradient(to left, rgba(0, 173, 216, 0.2), rgba(0, 204, 255, 0.1) 50%, rgba(0, 204, 255, 0.2) 80%, rgba(0, 173, 216, 0.3));
+    border-radius: 50px/10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+    box-shadow: 0px -2px 3px -1px rgba(0, 204, 255, 0.25);
+}
+
+.bubble {
+    display: block;
+    border: 0.5px solid rgba(255, 255, 255, 0.7);
+    position: absolute;
+    z-index: 1;
+    border-radius: 6px/3px;
+    transform: skew(0deg, 2deg);
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(0, 204, 255, 0.1);
+}
+.bubble1 {
+    height: 3px;
+    width: 6px;
+    left: 6px;
+    top: 7.2px;
+}
+.bubble2 {
+    height: 2px;
+    width: 4px;
+    left: 14px;
+    top: 8.4px;
+}
+.bubble3 {
+    height: 0.5px;
+    left: 14px;
+    width: 0.5px;
+    bottom: 2px;
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.bubble3 {
+    animation: bubbleRise 4s linear infinite;
+}
+@keyframes bubbleRise {
+    0% {
+        transform: translate(0px, 0px);
+        opacity: 0;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    10% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+    30% {
+        transform: translate(-1px, -15px);
+    }
+    50% {
+        transform: translate(1px, -30px);
+    }
+    75% {
+        transform: translate(-1px, -50px) scale(1.2);
+    }
+    98% {
+        opacity: 1;
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+    100% {
+        
+        /* transform: translate(0px, -107px) scale(1.4); */
+        transform: translate(0px, calc(13px - var(--water-height))) scale(1.4);
+        opacity: 0;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}
+.bubble1,
+.bubble2 {
+    animation: bubbleMove 4s linear infinite alternate;
+}
+@keyframes bubbleMove {
+    0% {
+        transform: translate(0px, 0px) skew(0deg, 2deg);
+    }
+    25% {
+        transform: translate(-2px, 0.5px) skew(0deg, 5deg);
+    }
+    50% {
+        transform: translate(0px, -0.5px) skew(0deg, 2deg);
+    }
+    75% {
+        transform: translate(2px, 0.5px) skew(0deg, 0deg);
+    }
+    100% {
+        transform: translate(0px, 0px) skew(0deg, 2deg);
+    }
+}
+
+
+.cloverTop {
+    position: absolute;
+    left: 19px;
+    top: -7px;
+    z-index: 1;
+    height: 14px;
+    overflow: hidden;
+}
+.cloverBottom {
+    position: absolute;
+    left: 14px;
+    top: 7px;
+    z-index: 0;
+    height: 54px;
+    width: 100px;
+    overflow: hidden;
+}
+
+.cloverBottom .clover {
+    margin: -14px 0px 0px 5px;
+}
+.cloverBottom:after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 36px;
+    border: 0.5px solid rgba(255, 255, 255, 0.3);
+    position: absolute;
+    left: 3px;
+    top: -1px;
+    z-index: 1;
+    border-radius: 19px/2px;
+    border-top: none;
+    border-right: none;
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.2) inset;
+}
+.cloverBottom:before {
+    content: '';
+    display: block;
+    height: 3.5px;
+    width: 41px;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    position: absolute;
+    left: 2px;
+    top: -1px;
+    border-radius: 19px/3.5px;
+    border-top: none;
+    border-left: none;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.15) inset, 0px 0px 1px rgba(0, 0, 0, 0.08) inset;
+    z-index: 2;
+}
+
+
+.cloverTop,
+.cloverBottom {
+    animation: cloverMove 4s linear infinite alternate;
+}
+@keyframes cloverMove {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    25% {
+        transform: translate(-3px, 1px);
+    }
+    50% {
+        transform: translate(0px, -1px);
+    }
+    75% {
+        transform: translate(4px, 1px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+
+.clover {
+    position: relative;
+}
+.leave {
+    display: block;
+    height: 16px;
+    width: 10px;
+    background: #2cb62c;
+    position: absolute;
+    left: 17px;
+    top: 1px;
+    transform: rotate(-45deg);
+    border-radius: 5px 5px 0px 3px;
+    transform-origin: -2% 102%;
+}
+.leave:after {
+    content: '';
+    display: block;
+    height: 16px;
+    width: 10px;
+    background: #2cb62c;
+    transform: rotate(90deg) translate(-5px, 5px);
+    transform-origin: 50% 100%;
+    border-radius: 5px 5px 3px 0px;
+}
+.leaves {
+    height: 34px;
+    width: 34px;
+    position: relative;
+    z-index: 1;
+}
+.angleN {
+    transform: rotate(-45deg);
+}
+.angleS {
+    transform: rotate(135deg);
+}
+.angleW {
+    transform: rotate(-135deg);
+}
+.angleE {
+    transform: rotate(45deg);
+}
+.branch {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    left: 15px;
+    top: -4px;
+}
+.branch:after {
+    content: '';
+    display: block;
+    height: 50px;
+    width: 40px;
+    border-bottom: 2px solid #219b21;
+    border-radius: 50px 50px 25px 150px;
+    position: absolute;
+    left: 0px;
+    top: -8px;
+}
+
+.branch {
+    animation: branchMove 4s linear infinite alternate;
+    transform-origin: 0% 0%;
+}
+@keyframes branchMove {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(3deg);
+    }
+    50% {
+        transform: rotate(-2deg);
+    }
+    75% {
+        transform: rotate(4deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+.jellyfish {
+    position: absolute;
+    left: 40px;
+    top: 30px;
+    animation: jellyfishSwimming 4s linear infinite alternate;
+}
+.jellyfish_head {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    display: block;
+    height: 15px;
+    width: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px 20px 10px 10px/20px 20px 16px 16px;
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5) inset, 1px 1px 2px rgba(255, 255, 255, 0.2) inset, 3px 3px 1px rgba(255, 255, 255, 0.2) inset, -1px -1px 1px rgba(255, 255, 255, 0.1) inset;
+    animation: jellyfish_headChange 4s linear infinite alternate;
+}
+.jellyfish_head:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    border-radius: 5px/3px;
+    transform: rotate(-15deg);
+    box-shadow: 0px 0px 1px rgba(255, 255, 255, 0.8) inset;
+}
+.jellyfish_tail {
+    position: absolute;
+    left: 2px;
+    top: 15px;
+    display: block;
+    height: 20px;
+    width: 18px;
+    border: 0.5px solid rgba(255, 255, 255, 0.4);
+    border-top: none;
+    border-bottom: none;
+    border-radius: 10px 10px 16px 6px/20px 20px 6px 6px;
+    box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3) inset, 0px 4px 3px rgba(255, 255, 255, 0.1) inset;
+    transform-origin: 50% 0%;
+    animation: jellyfish_tailChange 4s linear infinite alternate;
+}
+.jellyfish_tail:after {
+    content: '';
+    position: absolute;
+    left: 0.5px;
+    top: 1px;
+    display: block;
+    height: 21px;
+    width: 15.5px;
+    border: 0.5px solid rgba(255, 255, 255, 0.3);
+    border-right-color: rgba(255, 255, 255, 0.4);
+    border-top: none;
+    border-bottom: none;
+    border-radius: 10px/10px 20px 16px 16px;
+    box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3) inset, 0px 3px 3px rgba(255, 255, 255, 0.2) inset;
+}
+.jellyfish_tail:before {
+    content: '';
+    position: absolute;
+    left: 1.5px;
+    top: 1px;
+    display: block;
+    height: 17px;
+    width: 17px;
+    border-right: 0.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px 10px 16px 16px/30px 30px 8px 8px;
+    box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3) inset;
+    transform: rotate(-6deg);
+}
+.jellyfish_tail_in {
+    position: absolute;
+    left: -0.5px;
+    top: 0px;
+    display: block;
+    height: 16px;
+    width: 10px;
+    border-left: 0.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px 20px 16px 10px/20px 20px 6px 20px;
+    box-shadow: 3px 0px 3px rgba(255, 255, 255, 0.2) inset;
+    transform: rotate(14deg);
+}
+@keyframes jellyfishSwimming {
+    0% {
+        transform: translate(0px, 0px) rotate(-4deg) scale(0.8);
+    }
+    20% {
+        transform: translate(-1px, -3px) rotate(-6deg) scale(0.8);
+    }
+    50% {
+        transform: translate(-2px, -1px) rotate(-3deg) scale(1);
+    }
+    70% {
+        transform: translate(-1px, -3px) rotate(-6deg) scale(0.8);
+    }
+    100% {
+        transform: translate(0px, 0px) rotate(-4deg) scale(0.8);
+    }
+}
+@keyframes jellyfish_headChange {
+    0% {
+        transform: scale(1);
+    }
+    5% {
+        transform: scale(1.1, 0.95);
+    }
+    20% {
+        transform: scale(0.95, 1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    55% {
+        transform: scale(1.1, 0.95);
+    }
+    70% {
+        transform: scale(0.95, 1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes jellyfish_tailChange {
+    0% {
+        transform: scale(0.8);
+    }
+    5% {
+        transform: scale(0.9, 0.75);
+    }
+    20% {
+        transform: scale(0.7, 1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    55% {
+        transform: scale(0.9, 0.75);
+    }
+    70% {
+        transform: scale(0.7, 1);
+    }
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+
+.pink .water {
+    background: linear-gradient(-85deg, rgba(255, 0, 204, 0.35), rgba(210, 0, 170, 0.55) 70%, rgba(210, 0, 170, 0.4));
+    box-shadow: 0px 0px 6px rgba(255, 0, 204, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 0, 204, 0.3), 0px 1px 3px rgba(255, 0, 204, 0.2);
+}
+.pink .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), rgba(255, 0, 204, 0.05) 50%, rgba(255, 0, 204, 0.1) 80%, rgba(255, 255, 255, 0.3));
+    box-shadow: 0px 1px 2px -1px rgba(255, 0, 204, 0.35);
+}
+.pink .water:before {
+    background: linear-gradient(left, rgba(210, 0, 170, 0.2), rgba(255, 0, 204, 0.1) 50%, rgba(255, 0, 204, 0.2) 80%, rgba(210, 0, 170, 0.3));
+    box-shadow: 0px -2px 3px -1px rgba(255, 0, 204, 0.25);
+}
+.pink:before {
+    box-shadow: 0px 2px 10px -2px rgba(255, 0, 204, 0.3), 0px 2px 15px -2px rgba(255, 0, 204, 0.4);
+}
+.pink .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 0, 204, 0.1);
+}
+.yellow .water {
+    background: linear-gradient(-85deg, rgba(255, 240, 20, 0.35), rgba(233, 217, 0, 0.55) 70%, rgba(233, 217, 0, 0.4));
+    box-shadow: 0px 0px 6px rgba(255, 240, 20, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 240, 20, 0.3), 0px 1px 3px rgba(255, 240, 20, 0.2);
+}
+.yellow .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), rgba(255, 240, 20, 0.05) 50%, rgba(255, 240, 20, 0.1) 80%, rgba(255, 255, 255, 0.3));
+    box-shadow: 0px 1px 2px -1px rgba(255, 240, 20, 0.35);
+}
+.yellow .water:before {
+    background: linear-gradient(left, rgba(233, 217, 0, 0.2), rgba(255, 240, 20, 0.1) 50%, rgba(255, 240, 20, 0.2) 80%, rgba(233, 217, 0, 0.3));
+    box-shadow: 0px -2px 3px -1px rgba(255, 240, 20, 0.25);
+}
+.yellow:before {
+    box-shadow: 0px 2px 10px -2px rgba(255, 240, 20, 0.3), 0px 2px 15px -2px rgba(255, 240, 20, 0.4);
+}
+.yellow .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 240, 20, 0.1);
+}
+.green .water {
+    background: linear-gradient(-85deg, rgba(90, 230, 0, 0.35), rgba(70, 190, 0, 0.55) 70%, rgba(70, 190, 0, 0.4));
+    box-shadow: 0px 0px 6px rgba(90, 230, 0, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(90, 230, 0, 0.3), 0px 1px 3px rgba(90, 230, 0, 0.2);
+}
+.green .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), rgba(90, 230, 0, 0.05) 50%, rgba(90, 230, 0, 0.1) 80%, rgba(255, 255, 255, 0.3));
+    box-shadow: 0px 1px 2px -1px rgba(90, 230, 0, 0.35);
+}
+.green .water:before {
+    background: linear-gradient(left, rgba(70, 190, 0, 0.2), rgba(90, 230, 0, 0.1) 50%, rgba(90, 230, 0, 0.2) 80%, rgba(70, 190, 0, 0.3));
+    box-shadow: 0px -2px 3px -1px rgba(90, 230, 0, 0.25);
+}
+.green:before {
+    box-shadow: 0px 2px 10px -2px rgba(90, 230, 0, 0.3), 0px 2px 15px -2px rgba(90, 230, 0, 0.4);
+}
+.green .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(90, 230, 0, 0.1);
+}
+
+
+.pink .water {
+    background: linear-gradient(-85deg, rgba(255, 0, 204, 0.35), rgba(210, 0, 170, 0.55) 70%, rgba(210, 0, 170, 0.4));
+    box-shadow: 0px 0px 6px rgba(255, 0, 204, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 0, 204, 0.3), 0px 1px 3px rgba(255, 0, 204, 0.2);
+}
+.pink .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), rgba(255, 0, 204, 0.05) 50%, rgba(255, 0, 204, 0.1) 80%, rgba(255, 255, 255, 0.3));
+    box-shadow: 0px 1px 2px -1px rgba(255, 0, 204, 0.35);
+}
+.pink .water:before {
+    background: linear-gradient(left, rgba(210, 0, 170, 0.2), rgba(255, 0, 204, 0.1) 50%, rgba(255, 0, 204, 0.2) 80%, rgba(210, 0, 170, 0.3));
+    box-shadow: 0px -2px 3px -1px rgba(255, 0, 204, 0.25);
+}
+.pink:before {
+    box-shadow: 0px 2px 10px -2px rgba(255, 0, 204, 0.3), 0px 2px 15px -2px rgba(255, 0, 204, 0.4);
+}
+.pink .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 0, 204, 0.1);
+}
+.yellow .water {
+    background: linear-gradient(-85deg, rgba(255, 240, 20, 0.35), rgba(233, 217, 0, 0.55) 70%, rgba(233, 217, 0, 0.4));
+    box-shadow: 0px 0px 6px rgba(255, 240, 20, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 240, 20, 0.3), 0px 1px 3px rgba(255, 240, 20, 0.2);
+}
+.yellow .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), rgba(255, 240, 20, 0.05) 50%, rgba(255, 240, 20, 0.1) 80%, rgba(255, 255, 255, 0.3));
+    box-shadow: 0px 1px 2px -1px rgba(255, 240, 20, 0.35);
+}
+.yellow .water:before {
+    background: linear-gradient(left, rgba(233, 217, 0, 0.2), rgba(255, 240, 20, 0.1) 50%, rgba(255, 240, 20, 0.2) 80%, rgba(233, 217, 0, 0.3));
+    box-shadow: 0px -2px 3px -1px rgba(255, 240, 20, 0.25);
+}
+.yellow:before {
+    box-shadow: 0px 2px 10px -2px rgba(255, 240, 20, 0.3), 0px 2px 15px -2px rgba(255, 240, 20, 0.4);
+}
+.yellow .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 240, 20, 0.1);
+}
+.green .water {
+    background: linear-gradient(-85deg, rgba(90, 230, 0, 0.35), rgba(70, 190, 0, 0.55) 70%, rgba(70, 190, 0, 0.4));
+    box-shadow: 0px 0px 6px rgba(90, 230, 0, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(90, 230, 0, 0.3), 0px 1px 3px rgba(90, 230, 0, 0.2);
+}
+.green .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), rgba(90, 230, 0, 0.05) 50%, rgba(90, 230, 0, 0.1) 80%, rgba(255, 255, 255, 0.3));
+    box-shadow: 0px 1px 2px -1px rgba(90, 230, 0, 0.35);
+}
+.green .water:before {
+    background: linear-gradient(left, rgba(70, 190, 0, 0.2), rgba(90, 230, 0, 0.1) 50%, rgba(90, 230, 0, 0.2) 80%, rgba(70, 190, 0, 0.3));
+    box-shadow: 0px -2px 3px -1px rgba(90, 230, 0, 0.25);
+}
+.green:before {
+    box-shadow: 0px 2px 10px -2px rgba(90, 230, 0, 0.3), 0px 2px 15px -2px rgba(90, 230, 0, 0.4);
+}
+.green .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(90, 230, 0, 0.1);
+}
+
+.water_pink .water {
+    box-shadow: 0px 0px 6px rgba(255, 0, 204, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 0, 204, 0.3), 0px 1px 3px rgba(255, 0, 204, 0.2);
+}
+.water_pink .water:after {
+    box-shadow: 0px 1px 2px -1px rgba(255, 0, 204, 0.35);
+}
+.water_pink .water:before {
+    box-shadow: 0px -2px 3px -1px rgba(255, 0, 204, 0.25);
+}
+.water_pink:before {
+    box-shadow: 0px 2px 10px -2px rgba(255, 0, 204, 0.3), 0px 2px 15px -2px rgba(255, 0, 204, 0.4);
+}
+.water_pink .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 0, 204, 0.1);
+}
+.water_yellow .water {
+    box-shadow: 0px 0px 6px rgba(255, 240, 20, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 240, 20, 0.3), 0px 1px 3px rgba(255, 240, 20, 0.2);
+}
+.water_yellow .water:after {
+    box-shadow: 0px 1px 2px -1px rgba(255, 240, 20, 0.35);
+}
+.water_yellow .water:before {
+    box-shadow: 0px -2px 3px -1px rgba(255, 240, 20, 0.25);
+}
+.water_yellow:before {
+    box-shadow: 0px 2px 10px -2px rgba(255, 240, 20, 0.3), 0px 2px 15px -2px rgba(255, 240, 20, 0.4);
+}
+.water_yellow .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 240, 20, 0.1);
+}
+.water_green .water {
+    box-shadow: 0px 0px 6px rgba(90, 230, 0, 0.5) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(90, 230, 0, 0.3), 0px 1px 3px rgba(90, 230, 0, 0.2);
+}
+.water_green .water:after {
+    box-shadow: 0px 1px 2px -1px rgba(90, 230, 0, 0.35);
+}
+.water_green .water:before {
+    box-shadow: 0px -2px 3px -1px rgba(90, 230, 0, 0.25);
+}
+.water_green:before {
+    box-shadow: 0px 2px 10px -2px rgba(90, 230, 0, 0.3), 0px 2px 15px -2px rgba(90, 230, 0, 0.4);
+}
+.water_green .bubble {
+    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(90, 230, 0, 0.1);
+}
+
+
+
+
+
