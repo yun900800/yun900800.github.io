@@ -71,13 +71,15 @@ class Bottle {
             return classes.join(' ');
         }
         
-        if (this.options.color === 'pink') classes.push('bottle-pink');
-        else if (this.options.color === 'yellow') classes.push('bottle-yellow');
-        else if (this.options.color === 'green') classes.push('bottle-green');
-        
-        if (this.options.waterOnly && this.options.color === 'pink') classes.push('bottle-water-pink');
-        else if (this.options.waterOnly && this.options.color === 'yellow') classes.push('bottle-water-yellow');
-        else if (this.options.waterOnly && this.options.color === 'green') classes.push('bottle-water-green');
+        if (this.options.waterOnly) {
+            if (this.options.color === 'pink') classes.push('bottle-water-pink');
+            else if (this.options.color === 'yellow') classes.push('bottle-water-yellow');
+            else if (this.options.color === 'green') classes.push('bottle-water-green');
+        } else {
+            if (this.options.color === 'pink') classes.push('bottle-pink');
+            else if (this.options.color === 'yellow') classes.push('bottle-yellow');
+            else if (this.options.color === 'green') classes.push('bottle-green');
+        }
         
         return classes.join(' ');
     }
@@ -325,6 +327,91 @@ class Bottle {
         return this;
     }
 
+    _updateClover(addAnimation = false) {
+        if (this.element) {
+            const water = this.element.querySelector('.water');
+            if (water) {
+                const type = this.options.cloverType;
+                const count = this.options.cloverCount || 1;
+                const clovers = [];
+                
+                for (let i = 0; i < count; i++) {
+                    const offsetX = i * 35;
+                    let style = `left: ${offsetX}px;`;
+                    
+                    if (addAnimation && i === count - 1) {
+                        style += ` animation: newCloverFloat 2s ease-out forwards;`;
+                    }
+                    
+                    if (type === 'three') {
+                        clovers.push(`
+                            <div class="clover-wrapper" style="${style}">
+                                <div class="clover cloverThree">
+                                    <div class="leaves">
+                                        <i class="leave angleN"></i>
+                                        <i class="leave angleS"></i>
+                                        <i class="leave angleE"></i>
+                                    </div>
+                                    <i class="branch"></i>
+                                </div>
+                            </div>
+                        `);
+                    } else {
+                        clovers.push(`
+                            <div class="clover-wrapper" style="${style}">
+                                <div class="clover">
+                                    <div class="leaves">
+                                        <i class="leave angleN"></i>
+                                        <i class="leave angleS"></i>
+                                        <i class="leave angleW"></i>
+                                        <i class="leave angleE"></i>
+                                    </div>
+                                    <i class="branch"></i>
+                                </div>
+                            </div>
+                        `);
+                    }
+                }
+                
+                const bottom = water.querySelector('.cloverBottom');
+                if (bottom) bottom.innerHTML = clovers.join('');
+            }
+        }
+    }
+
+    _updateJellyfish(addAnimation = false) {
+        if (this.element) {
+            const water = this.element.querySelector('.water');
+            if (water) {
+                const count = this.options.jellyfishCount || 1;
+                const jellyfishs = [];
+                
+                for (let i = 0; i < count; i++) {
+                    const offsetX = i * 50;
+                    let style = `left: ${offsetX}px;`;
+                    
+                    if (addAnimation && i === count - 1) {
+                        style += ` animation: newJellyfishFloat 2s ease-out forwards;`;
+                    }
+                    
+                    jellyfishs.push(`
+                        <div class="jellyfish-wrapper" style="${style}">
+                            <div class="jellyfish">
+                                <div class="jellyfish_head"></div>
+                                <div class="jellyfish_tail">
+                                    <div class="jellyfish_tail_in"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+                
+                const container = water.querySelector('.jellyfish-container');
+                if (container) container.innerHTML = jellyfishs.join('');
+            }
+        }
+    }
+
     addJellyfish() {
         this.options.jellyfishCount++;
         this._updateJellyfish(true);
@@ -359,39 +446,6 @@ class Bottle {
             }
         }
         return this;
-    }
-
-    _updateJellyfish(addAnimation = false) {
-        if (this.element) {
-            const water = this.element.querySelector('.water');
-            if (water) {
-                const count = this.options.jellyfishCount || 1;
-                const jellyfishs = [];
-                
-                for (let i = 0; i < count; i++) {
-                    const offsetX = i * 50;
-                    let style = `left: ${offsetX}px;`;
-                    
-                    if (addAnimation && i === count - 1) {
-                        style += ` animation: newJellyfishFloat 2s ease-out forwards;`;
-                    }
-                    
-                    jellyfishs.push(`
-                        <div class="jellyfish-wrapper" style="${style}">
-                            <div class="jellyfish">
-                                <div class="jellyfish_head"></div>
-                                <div class="jellyfish_tail">
-                                    <div class="jellyfish_tail_in"></div>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-                }
-                
-                const container = water.querySelector('.jellyfish-container');
-                if (container) container.innerHTML = jellyfishs.join('');
-            }
-        }
     }
 
     _adjustColor(hex, amount) {

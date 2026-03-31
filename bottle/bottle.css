@@ -1,4 +1,79 @@
-@import url('bottle-variables.css');
+:root {
+    /* ========== 瓶子尺寸 ========== */
+    --bottle-main-width: 150px;
+    --bottle-top-width: calc(var(--bottle-main-width) - 40px);
+    --bottle-neck-width: calc(var(--bottle-main-width) - 58px);
+    --bottle-main-height: 150px;
+    --bottle-top-height: 30px;
+    --bottle-neck-height: 20px;
+    --bottle-mouth-height: 52px;
+    --water-height: 100px;
+
+    /* ========== 基础颜色 ========== */
+    --bottle-border-color: rgba(255, 255, 255, 0.5);
+    --bottle-highlight: rgba(255, 255, 255, 0.6);
+    --clover-color: #2cb62c;
+    --clover-branch-color: #219b21;
+    --jellyfish-color: rgba(255, 255, 255, 0.15);
+    --jellyfish-border: rgba(255, 255, 255, 0.5);
+
+    /* ========== 蓝色水主题 ========== */
+    --water-primary: rgba(0, 204, 255, 0.35);
+    --water-secondary: rgba(0, 173, 216, 0.55);
+    --water-tertiary: rgba(0, 173, 216, 0.4);
+    --water-glow: rgba(0, 204, 255, 0.5);
+
+    /* ========== 粉色主题 ========== */
+    --pink-primary: rgba(255, 0, 204, 0.35);
+    --pink-secondary: rgba(210, 0, 170, 0.55);
+    --pink-tertiary: rgba(210, 0, 170, 0.4);
+    --pink-glow: rgba(255, 0, 204, 0.5);
+
+    /* ========== 黄色主题 ========== */
+    --yellow-primary: rgba(255, 240, 20, 0.35);
+    --yellow-secondary: rgba(233, 217, 0, 0.55);
+    --yellow-tertiary: rgba(233, 217, 0, 0.4);
+    --yellow-glow: rgba(255, 240, 20, 0.5);
+
+    /* ========== 绿色主题 ========== */
+    --green-primary: rgba(90, 230, 0, 0.35);
+    --green-secondary: rgba(70, 190, 0, 0.55);
+    --green-tertiary: rgba(70, 190, 0, 0.4);
+    --green-glow: rgba(90, 230, 0, 0.5);
+
+    /* ========== 气泡颜色 ========== */
+    --bubble-color: rgba(255, 255, 255, 0.7);
+
+    /* ========== 动画时长 ========== */
+    --animation-duration: 4s;
+
+    /* ========== 响应式断点 ========== */
+    --bottle-scale-mobile: 0.6;
+    --bottle-scale-tablet: 0.8;
+}
+
+/* ========== 响应式适配 ========== */
+@media (max-width: 768px) {
+    :root {
+        --bottle-main-width: 120px;
+        --bottle-main-height: 120px;
+        --bottle-top-height: 24px;
+        --bottle-neck-height: 16px;
+        --bottle-mouth-height: 42px;
+        --water-height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --bottle-main-width: 100px;
+        --bottle-main-height: 100px;
+        --bottle-top-height: 20px;
+        --bottle-neck-height: 14px;
+        --bottle-mouth-height: 36px;
+        --water-height: 65px;
+    }
+}
 
 * {
     margin: 0;
@@ -372,29 +447,6 @@ body {
         border-color: rgba(255, 255, 255, 0.1);
     }
 }
-    10% {
-        transform: translate(0px, 0px);
-        opacity: 1;
-    }
-    30% {
-        transform: translate(-1px, -15px);
-    }
-    50% {
-        transform: translate(1px, -30px);
-    }
-    75% {
-        transform: translate(-1px, -50px) scale(1.2);
-    }
-    98% {
-        opacity: 1;
-        border-color: rgba(255, 255, 255, 0.25);
-    }
-    100% {
-        transform: translate(0px, calc(13px - var(--water-height))) scale(1.4);
-        opacity: 0;
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-}
 
 .bubble1,
 .bubble2 {
@@ -696,6 +748,8 @@ body {
 }
 
 .jellyfish {
+    position: relative;
+}
 
 .jellyfish_head {
     position: absolute;
@@ -813,9 +867,16 @@ body {
 }
 
 /* ========== 粉色主题 ========== */
+.bottle-pink {
+    --water-primary: var(--pink-primary);
+    --water-secondary: var(--pink-secondary);
+    --water-tertiary: var(--pink-tertiary);
+    --water-glow: var(--pink-glow);
+}
+
 .bottle-pink .water {
-    background: linear-gradient(-85deg, var(--pink-primary), var(--pink-secondary) 70%, var(--pink-tertiary));
-    box-shadow: 0px 0px 6px var(--pink-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 0, 204, 0.3), 0px 1px 3px rgba(255, 0, 204, 0.2);
+    background: linear-gradient(-85deg, var(--water-primary), var(--water-secondary) 70%, var(--water-tertiary));
+    box-shadow: 0px 0px 6px var(--water-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 0, 204, 0.3), 0px 1px 3px rgba(255, 0, 204, 0.2);
 }
 
 .bottle-pink .water:after {
@@ -837,9 +898,16 @@ body {
 }
 
 /* ========== 黄色主题 ========== */
+.bottle-yellow {
+    --water-primary: var(--yellow-primary);
+    --water-secondary: var(--yellow-secondary);
+    --water-tertiary: var(--yellow-tertiary);
+    --water-glow: var(--yellow-glow);
+}
+
 .bottle-yellow .water {
-    background: linear-gradient(-85deg, var(--yellow-primary), var(--yellow-secondary) 70%, var(--yellow-tertiary));
-    box-shadow: 0px 0px 6px var(--yellow-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 240, 20, 0.3), 0px 1px 3px rgba(255, 240, 20, 0.2);
+    background: linear-gradient(-85deg, var(--water-primary), var(--water-secondary) 70%, var(--water-tertiary));
+    box-shadow: 0px 0px 6px var(--water-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 240, 20, 0.3), 0px 1px 3px rgba(255, 240, 20, 0.2);
 }
 
 .bottle-yellow .water:after {
@@ -861,8 +929,15 @@ body {
 }
 
 /* ========== 绿色主题 ========== */
+.bottle-green {
+    --water-primary: var(--green-primary);
+    --water-secondary: var(--green-secondary);
+    --water-tertiary: var(--green-tertiary);
+    --water-glow: var(--green-glow);
+}
+
 .bottle-green .water {
-    background: linear-gradient(-85deg, var(--green-primary), var(--green-secondary) 70%, var(--green-tertiary));
+    background: linear-gradient(-85deg, var(--water-primary), var(--water-secondary) 70%, var(--water-tertiary));
     box-shadow: 0px 0px 6px var(--green-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(90, 230, 0, 0.3), 0px 1px 3px rgba(90, 230, 0, 0.2);
 }
 
@@ -885,15 +960,25 @@ body {
 }
 
 /* ========== 仅水色主题 ========== */
+.bottle-water-pink {
+    --water-primary: var(--pink-primary);
+    --water-secondary: var(--pink-secondary);
+    --water-tertiary: var(--pink-tertiary);
+    --water-glow: var(--pink-glow);
+}
+
 .bottle-water-pink .water {
-    box-shadow: 0px 0px 6px var(--pink-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 0, 204, 0.3), 0px 1px 3px rgba(255, 0, 204, 0.2);
+    background: linear-gradient(-85deg, var(--water-primary), var(--water-secondary) 70%, var(--water-tertiary));
+    box-shadow: 0px 0px 6px var(--water-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 0, 204, 0.3), 0px 1px 3px rgba(255, 0, 204, 0.2);
 }
 
 .bottle-water-pink .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), var(--pink-glow) 50%, var(--pink-glow) 80%, rgba(255, 255, 255, 0.3));
     box-shadow: 0px 1px 2px -1px rgba(255, 0, 204, 0.35);
 }
 
 .bottle-water-pink .water:before {
+    background: linear-gradient(left, var(--pink-secondary), var(--pink-primary) 50%, var(--pink-primary) 80%, var(--pink-secondary));
     box-shadow: 0px -2px 3px -1px rgba(255, 0, 204, 0.25);
 }
 
@@ -905,15 +990,25 @@ body {
     box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 0, 204, 0.1);
 }
 
+.bottle-water-yellow {
+    --water-primary: var(--yellow-primary);
+    --water-secondary: var(--yellow-secondary);
+    --water-tertiary: var(--yellow-tertiary);
+    --water-glow: var(--yellow-glow);
+}
+
 .bottle-water-yellow .water {
-    box-shadow: 0px 0px 6px var(--yellow-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 240, 20, 0.3), 0px 1px 3px rgba(255, 240, 20, 0.2);
+    background: linear-gradient(-85deg, var(--water-primary), var(--water-secondary) 70%, var(--water-tertiary));
+    box-shadow: 0px 0px 6px var(--water-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(255, 240, 20, 0.3), 0px 1px 3px rgba(255, 240, 20, 0.2);
 }
 
 .bottle-water-yellow .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), var(--yellow-glow) 50%, var(--yellow-glow) 80%, rgba(255, 255, 255, 0.3));
     box-shadow: 0px 1px 2px -1px rgba(255, 240, 20, 0.35);
 }
 
 .bottle-water-yellow .water:before {
+    background: linear-gradient(left, var(--yellow-secondary), var(--yellow-primary) 50%, var(--yellow-primary) 80%, var(--yellow-secondary));
     box-shadow: 0px -2px 3px -1px rgba(255, 240, 20, 0.25);
 }
 
@@ -925,15 +1020,25 @@ body {
     box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6) inset, -1px 1px 2px -1px rgba(255, 240, 20, 0.1);
 }
 
+.bottle-water-green {
+    --water-primary: var(--green-primary);
+    --water-secondary: var(--green-secondary);
+    --water-tertiary: var(--green-tertiary);
+    --water-glow: var(--green-glow);
+}
+
 .bottle-water-green .water {
-    box-shadow: 0px 0px 6px var(--green-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(90, 230, 0, 0.3), 0px 1px 3px rgba(90, 230, 0, 0.2);
+    background: linear-gradient(-85deg, var(--water-primary), var(--water-secondary) 70%, var(--water-tertiary));
+    box-shadow: 0px 0px 6px var(--water-glow) inset, 0px 0.2px 3px -1px rgba(0, 0, 0, 0.3) inset, 0px 2px 6px -1px rgba(0, 0, 0, 0.1) inset, 0px 2px 5px rgba(90, 230, 0, 0.3), 0px 1px 3px rgba(90, 230, 0, 0.2);
 }
 
 .bottle-water-green .water:after {
+    background: linear-gradient(left, rgba(255, 255, 255, 0.4), var(--green-glow) 50%, var(--green-glow) 80%, rgba(255, 255, 255, 0.3));
     box-shadow: 0px 1px 2px -1px rgba(90, 230, 0, 0.35);
 }
 
 .bottle-water-green .water:before {
+    background: linear-gradient(left, var(--green-secondary), var(--green-primary) 50%, var(--green-primary) 80%, var(--green-secondary));
     box-shadow: 0px -2px 3px -1px rgba(90, 230, 0, 0.25);
 }
 
