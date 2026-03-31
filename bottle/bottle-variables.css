@@ -1,0 +1,76 @@
+:root {
+    /* ========== 瓶子尺寸 ========== */
+    --bottle-main-width: 150px;
+    --bottle-top-width: calc(var(--bottle-main-width) - 40px);
+    --bottle-neck-width: calc(var(--bottle-main-width) - 58px);
+    --bottle-main-height: 150px;
+    --bottle-top-height: 30px;
+    --bottle-neck-height: 20px;
+    --bottle-mouth-height: 52px;
+    --water-height: 100px;
+
+    /* ========== 基础颜色 ========== */
+    --bottle-border-color: rgba(255, 255, 255, 0.5);
+    --bottle-highlight: rgba(255, 255, 255, 0.6);
+    --clover-color: #2cb62c;
+    --clover-branch-color: #219b21;
+    --jellyfish-color: rgba(255, 255, 255, 0.15);
+    --jellyfish-border: rgba(255, 255, 255, 0.5);
+
+    /* ========== 蓝色水主题 ========== */
+    --water-primary: rgba(0, 204, 255, 0.35);
+    --water-secondary: rgba(0, 173, 216, 0.55);
+    --water-tertiary: rgba(0, 173, 216, 0.4);
+    --water-glow: rgba(0, 204, 255, 0.5);
+
+    /* ========== 粉色主题 ========== */
+    --pink-primary: rgba(255, 0, 204, 0.35);
+    --pink-secondary: rgba(210, 0, 170, 0.55);
+    --pink-tertiary: rgba(210, 0, 170, 0.4);
+    --pink-glow: rgba(255, 0, 204, 0.5);
+
+    /* ========== 黄色主题 ========== */
+    --yellow-primary: rgba(255, 240, 20, 0.35);
+    --yellow-secondary: rgba(233, 217, 0, 0.55);
+    --yellow-tertiary: rgba(233, 217, 0, 0.4);
+    --yellow-glow: rgba(255, 240, 20, 0.5);
+
+    /* ========== 绿色主题 ========== */
+    --green-primary: rgba(90, 230, 0, 0.35);
+    --green-secondary: rgba(70, 190, 0, 0.55);
+    --green-tertiary: rgba(70, 190, 0, 0.4);
+    --green-glow: rgba(90, 230, 0, 0.5);
+
+    /* ========== 气泡颜色 ========== */
+    --bubble-color: rgba(255, 255, 255, 0.7);
+
+    /* ========== 动画时长 ========== */
+    --animation-duration: 4s;
+
+    /* ========== 响应式断点 ========== */
+    --bottle-scale-mobile: 0.6;
+    --bottle-scale-tablet: 0.8;
+}
+
+/* ========== 响应式适配 ========== */
+@media (max-width: 768px) {
+    :root {
+        --bottle-main-width: 120px;
+        --bottle-main-height: 120px;
+        --bottle-top-height: 24px;
+        --bottle-neck-height: 16px;
+        --bottle-mouth-height: 42px;
+        --water-height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --bottle-main-width: 100px;
+        --bottle-main-height: 100px;
+        --bottle-top-height: 20px;
+        --bottle-neck-height: 14px;
+        --bottle-mouth-height: 36px;
+        --water-height: 65px;
+    }
+}
